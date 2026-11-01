@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="claude.md" />
+    <File Path="INTERVJU.md" />
+  </Folder>
+  <Folder Name="/Database/">
+    <File Path="Database/01_schema.sql" />
+    <File Path="Database/02_seed.sql" />
+    <File Path="Database/03_orders.sql" />
+    <File Path="Database/04_procedures.sql" />
+    <File Path="Database/05_activity_log.sql" />
+  </Folder>
+  <Project Path="WindowsFormsApp1/WindowsFormsApp1.csproj" Id="747279d6-6f08-4631-94be-f9be04790b22" />
+  <Project Path="WindowsFormsApp1.Tests/WindowsFormsApp1.Tests.csproj" Id="5b8e2d1c-7a4f-4e3b-9c61-2f0d8a7b3e15" />
+</Solution>

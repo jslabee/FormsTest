@@ -1,0 +1,23 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userprefs
+
+# Rezultati gradnje
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# NuGet (PackageReference - paketi so v %USERPROFILE%\.nuget, mapa packages/ samo pri packages.config)
+packages/
+*.nupkg
+
+# Testi
+TestResults/
+*.trx
+
+# Log datoteke aplikacije
+logs/
+*.log

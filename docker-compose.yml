@@ -1,0 +1,51 @@
+# Testna MySQL baza za TestApp
+# Zagon:   docker compose up -d
+# Ustavi:  docker compose down
+# Ponastavi bazo (pobriše podatke, ponovno požene skripte): docker compose down -v
+
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: testapp-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "root123"
+      MYSQL_DATABASE: "testapp"
+      MYSQL_USER: "testapp_user"
+      MYSQL_PASSWORD: "Test123!"
+    ports:
+      - "3306:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_0900_ai_ci
+      # "Profiler": zabeleži VSE poizvedbe, ki pridejo v bazo
+      - --general-log=1
+      - --general-log-file=/var/lib/mysql/general.log
+      # Počasne poizvedbe (daljše od 0,5 s)
+      - --slow-query-log=1
+      - --slow-query-log-file=/var/lib/mysql/slow.log
+      - --long-query-time=0.5
+      # Nizka meja povezav, da lahko preizkusiš napako "Too many connections"
+      - --max-connections=30
+    volumes:
+      - mysql-data:/var/lib/mysql
+      # Skripte iz mape Database se izvedejo samo ob PRVEM zagonu (po abecedi)
+      - ./Database:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot123"]
+      interval: 5s
+      retries: 10
+
+  adminer:
+    image: adminer
+    container_name: testapp-adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-data:
